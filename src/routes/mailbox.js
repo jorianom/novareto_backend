@@ -1,18 +1,15 @@
 const express = require("express");
-
+const mailboxController = require("../controller/mailboxController");
+const {check} = require("express-validator");
 const router = express.Router();
 
-router.get("/", async function (req, res) {
-    try {
-    } catch (error) {
-        return res.status(500).json({ error: error.message });
-    }
-});
-router.post("/add", async function (req, res) {
-    try {
-    } catch (error) {
-        return res.status(500).json({ error: error.message });
-    }
-});
+router.get("/", mailboxController.getMailboxes);
+router.post("/add",[
+    check("name").not().isEmpty(),
+    check("email").isEmail(),
+    check("celular").isMobilePhone("pt-BR"),
+    check("type").not().isEmpty(),
+    check("comments").not().isEmpty(),
+], mailboxController.addMailbox);
 
 module.exports = router;
