@@ -1,5 +1,6 @@
-const Mailbox = require("../models/mailbox");
+const Mailbox = require("../models/Mailbox.js");
 const { validationResult } = require("express-validator");
+
 
 exports.addMailbox = async (req, res) => {
     const errors = validationResult(req);
